@@ -162,6 +162,16 @@ def valores_unicos(df: pd.DataFrame, coluna: str, multivalor: bool) -> list:
     return sorted(serie.unique())
 
 
+def gerar_url_incorporada(url_forms: str) -> str:
+    """Converte o link normal de um Google Forms (.../viewform?...) no link incorporável
+    (.../viewform?embedded=true), usado para exibir o formulário direto dentro do app
+    via iframe, sem o usuário precisar sair da página."""
+    if "embedded=true" in url_forms:
+        return url_forms
+    separador = "&" if "?" in url_forms else "?"
+    return f"{url_forms}{separador}embedded=true"
+
+
 def url_e_placeholder(url: str) -> bool:
     """Detecta se a URL ainda é um valor de exemplo/placeholder e não foi configurada."""
     if not url or not str(url).strip():
@@ -195,7 +205,6 @@ def carregar_com_aviso(url: str, nome_amigavel: str, csv_local: str = None) -> p
         try:
             df_local = pd.read_csv(csv_local)
             df_local.columns = df_local.columns.str.strip()
-            st.caption(f"🧪 Modo de teste ativo — exibindo dados de `{csv_local}` (não é a planilha real).")
             return df_local
         except FileNotFoundError:
             st.error(
@@ -232,18 +241,17 @@ eh_schema_novo = schema is SCHEMA_NOVO
 # ======================================================================================
 st.sidebar.title("🧩 Menu Principal")
 
-st.sidebar.link_button(
-    "📤 Compartilhar Nova Atividade",
-    LINK_GOOGLE_FORMS_CADASTRO,
-    use_container_width=True,
+aba_selecionada = st.sidebar.radio(
+    "Navegue pela plataforma:",
+    [
+        "📚 Visualizar Atividades",
+        "📤 Compartilhar Nova Atividade",
+        "📊 Estatísticas do Projeto",
+        "⭐ Avaliar Plataforma",
+    ],
 )
 
 st.sidebar.markdown("---")
-
-aba_selecionada = st.sidebar.radio(
-    "Navegue pela plataforma:",
-    ["📚 Visualizar Atividades", "📊 Estatísticas do Projeto", "⭐ Avaliar Plataforma"],
-)
 
 # ======================================================================================
 # ABA 1: VISUALIZAR ATIVIDADES
@@ -397,6 +405,32 @@ if aba_selecionada == "📚 Visualizar Atividades":
         st.warning("Nenhuma atividade cadastrada ainda. Seja o primeiro a compartilhar uma!")
 
 # ======================================================================================
+# ABA NOVA: COMPARTILHAR NOVA ATIVIDADE (formulário incorporado)
+# ======================================================================================
+elif aba_selecionada == "📤 Compartilhar Nova Atividade":
+    st.title("Compartilhar uma Nova Atividade")
+    st.markdown(
+        "Preencha o formulário abaixo — sem sair desta página — para enviar uma nova "
+        "atividade pedagógica adaptada para o acervo da comunidade."
+    )
+
+    if url_e_placeholder(LINK_GOOGLE_FORMS_CADASTRO):
+        st.info(
+            "ℹ️ O link do formulário de cadastro ainda não foi configurado. "
+            "Substitua `LINK_GOOGLE_FORMS_CADASTRO` no topo do `app.py` pelo link real do seu Google Forms."
+        )
+    else:
+        with st.spinner("Carregando formulário..."):
+            st.iframe(
+                gerar_url_incorporada(LINK_GOOGLE_FORMS_CADASTRO),
+                height=1100,
+            )
+        st.caption(
+            "O formulário não carregou corretamente? "
+            f"[Abra em uma nova aba]({LINK_GOOGLE_FORMS_CADASTRO})."
+        )
+
+# ======================================================================================
 # ABA 2: ESTATÍSTICAS DO PROJETO
 # ======================================================================================
 elif aba_selecionada == "📊 Estatísticas do Projeto":
@@ -449,7 +483,23 @@ elif aba_selecionada == "⭐ Avaliar Plataforma":
     with col_esquerda:
         st.markdown("### Deixe sua nota:")
         st.write("Criamos um formulário rápido para coletar notas de 1 a 5, sugestões e críticas de usabilidade.")
-        st.link_button("📝 Abrir Formulário de Avaliação", LINK_GOOGLE_FORMS_AVALICAO, type="primary")
+
+        if url_e_placeholder(LINK_GOOGLE_FORMS_AVALICAO):
+            st.info(
+                "ℹ️ O link do formulário de avaliação ainda não foi configurado. "
+                "Substitua `LINK_GOOGLE_FORMS_AVALICAO` no topo do `app.py`."
+            )
+        else:
+            with st.expander("📝 Abrir formulário de avaliação", expanded=False):
+                with st.spinner("Carregando formulário..."):
+                    st.iframe(
+                        gerar_url_incorporada(LINK_GOOGLE_FORMS_AVALICAO),
+                        height=700,
+                    )
+                st.caption(
+                    "Não carregou? "
+                    f"[Abra em uma nova aba]({LINK_GOOGLE_FORMS_AVALICAO})."
+                )
 
     with col_direita:
         st.markdown("### O que a comunidade está dizendo:")
