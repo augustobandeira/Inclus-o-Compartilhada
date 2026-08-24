@@ -60,7 +60,7 @@ CSV_TESTE = "atividades_pedagogicas_limpo.csv"
 # ⚠️ SUBSTITUA os valores abaixo pelos links reais do seu Google Forms e das planilhas
 # publicadas em CSV (Arquivo > Compartilhar > Publicar na Web > CSV, no Google Sheets).
 URL_RESPOSTAS_ATIVIDADES = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSkm00K4FLV_GAnJrli0Laqt4-hv35oFz14OgdRIvicxWEV0EOX8hHx1ijNVqk8uqklUKfjeKrSTFVi/pub?gid=1764416550&single=true&output=csv"
-LINK_GOOGLE_FORMS_CADASTRO = "https://google.com"   # substitua pelo link do seu Forms de cadastro
+LINK_GOOGLE_FORMS_CADASTRO = "https://docs.google.com/forms/d/e/1FAIpQLSdWuD4bCJJqwXUmv1A3bmdblhK6cfjSfwWyx2_sVmEwtJTqJQ/viewform"   # substitua pelo link do seu Forms de cadastro
 LINK_GOOGLE_FORMS_AVALICAO = "https://google.com"   # substitua pelo link do seu Forms de avaliação
 URL_RESPOSTAS_AVALIACOES = "https://docs.google.com/spreadsheets/d/e/2PACX-XXXXXXXXXXXXX/pub?gid=0&single=true&output=csv"
 
