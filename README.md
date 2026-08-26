@@ -15,7 +15,15 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Com `MODO_TESTE = False` (já configurado), o app carrega as atividades diretamente da planilha real vinculada ao Google Forms. Se a planilha ainda não tiver respostas (ou estiver temporariamente inacessível), o app cai automaticamente nos 5 exemplos embutidos, para nunca ficar "vazio" ou quebrado.
+Com `MODO_TESTE = False` (já configurado), o app carrega as atividades diretamente da planilha real vinculada ao Google Forms. Se a planilha ainda não tiver respostas (ou estiver temporariamente inacessível), o app cai automaticamente nos 24 exemplos embutidos (ver seção abaixo), para nunca ficar "vazio" ou quebrado.
+
+## Exemplos embutidos (dados de demonstração)
+
+`DADOS_EXEMPLO_ATIVIDADES` em `app.py` cobre os 8 tipos de deficiência/neurodivergência do formulário — TEA, TDAH, Deficiência Auditiva, Deficiência Visual, Deficiência Física/Motora, Deficiência Intelectual/Síndrome de Down, Dislexia/Discalculia e Múltiplas deficiências/Outro — com 3 exemplos cada (1 atividade, 1 artigo e 1 exercício didático), totalizando 24 itens. Esse conteúdo foi escrito internamente para o projeto (não é conteúdo real de terceiros) e serve para que a plataforma já tenha exemplos de uso completos assim que publicada, mesmo antes de a comunidade enviar suas próprias contribuições pelo formulário. Nenhum desses exemplos tem link de vídeo/conteúdo externo preenchido, para evitar links quebrados ou incorretos.
+
+A aba "Visualizar Atividades" ganhou um filtro **Tipo de Conteúdo** (Atividade / Artigo / Exercício Didático) e cada card mostra um selo indicando o tipo (🎯 Atividade, 📄 Artigo, ✏️ Exercício Didático). A aba "Estatísticas do Projeto" ganhou um terceiro gráfico com a distribuição por Tipo de Conteúdo.
+
+> O formulário do Google (Pergunta 4) ainda não pergunta o Tipo de Conteúdo — hoje ele só coleta atividades. Se no futuro quiser que a comunidade também envie artigos e exercícios pelo formulário, será preciso adicionar essa pergunta lá e mapear a coluna correspondente em `app.py` (`_COL_TIPO_CONTEUDO`). Até isso ser feito, respostas reais do formulário aparecem automaticamente com o selo "🎯 Atividade" por padrão.
 
 ## Links reais em produção
 
