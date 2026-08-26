@@ -4,3 +4,8 @@ backgroundColor = "#F4F6F9"
 secondaryBackgroundColor = "#FFFFFF"
 textColor = "#2C3E50"
 font = "sans serif"
+
+[client]
+# Esconde o menu de hamburguer (三) no canto superior direito para deixar
+# a interface mais limpa em telas pequenas/celular.
+toolbarMode = "minimal"
