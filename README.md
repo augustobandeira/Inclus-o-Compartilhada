@@ -23,7 +23,7 @@ Com `MODO_TESTE = False` (já configurado), o app carrega as atividades diretame
 
 A aba "Visualizar Atividades" ganhou um filtro **Tipo de Conteúdo** (Atividade / Artigo / Exercício Didático) e cada card mostra um selo indicando o tipo (🎯 Atividade, 📄 Artigo, ✏️ Exercício Didático). A aba "Estatísticas do Projeto" ganhou um terceiro gráfico com a distribuição por Tipo de Conteúdo.
 
-> O formulário do Google (Pergunta 4) ainda não pergunta o Tipo de Conteúdo — hoje ele só coleta atividades. Se no futuro quiser que a comunidade também envie artigos e exercícios pelo formulário, será preciso adicionar essa pergunta lá e mapear a coluna correspondente em `app.py` (`_COL_TIPO_CONTEUDO`). Até isso ser feito, respostas reais do formulário aparecem automaticamente com o selo "🎯 Atividade" por padrão.
+> O formulário do Google agora também pergunta o Tipo de Conteúdo: a Pergunta 23 ("Tipo de Conteúdo", Múltipla escolha, obrigatória, com as opções Atividade/Artigo/Exercício Didático) foi adicionada como a primeira pergunta da Seção 4, antes de "Título da Atividade". O texto da pergunta bate exatamente com `_COL_TIPO_CONTEUDO` em `app.py`, então a coluna nova na planilha de respostas é reconhecida automaticamente pelo app, sem precisar de nenhum ajuste de código. Respostas antigas (enviadas antes dessa mudança) continuam aparecendo com o selo "🎯 Atividade" por padrão, já que não têm essa coluna preenchida.
 
 ## Links reais em produção
 
@@ -34,7 +34,7 @@ A aba "Visualizar Atividades" ganhou um filtro **Tipo de Conteúdo** (Atividade 
 - **Planilha de respostas (edição, uso interno):** https://docs.google.com/spreadsheets/d/1l9G_4v5Nbi2_vE23W7TpM6iSrdtSwh_ln8c7WvVv0R4/edit
 - **CSV publicado (`URL_RESPOSTAS_ATIVIDADES`):** https://docs.google.com/spreadsheets/d/e/2PACX-1vRjw5AMHEDN0c6o8oczs0btovR0nJyuUyOveNtuydaBYUMr0ztSa3yu1RDNlHmDHsYXn9Q2EnzbVvM1/pub?output=csv
 
-O formulário tem 32 perguntas em 12 seções, com ramificação condicional pela Pergunta 4 ("Para qual tipo de deficiência ou neurodivergência esta atividade foi pensada?") — cada uma das 8 opções leva à seção específica daquele tipo de deficiência/neurodivergência, convergindo depois na seção "Dados gerais da atividade" e terminando em "Encerramento" (com termo de responsabilidade sobre direitos autorais).
+O formulário tem 33 perguntas em 12 seções, com ramificação condicional pela Pergunta 4 ("Para qual tipo de deficiência ou neurodivergência esta atividade foi pensada?") — cada uma das 8 opções leva à seção específica daquele tipo de deficiência/neurodivergência, convergindo depois na seção "Dados gerais da atividade" (que agora começa com a pergunta "Tipo de Conteúdo") e terminando em "Encerramento" (com termo de responsabilidade sobre direitos autorais).
 
 ### Formulário de avaliação da plataforma
 
@@ -54,6 +54,7 @@ O formulário tem 32 perguntas em 12 seções, com ramificação condicional pel
 - Proteção contra planilha real vazia ou fora do ar: se a URL configurada falhar, o app cai automaticamente nos dados de exemplo em vez de mostrar uma tela de erro.
 - Segundo formulário — "Avaliação da Plataforma" — criado, publicado e conectado (`LINK_GOOGLE_FORMS_AVALICAO`, `URL_RESPOSTAS_AVALIACOES`). Botões "Compartilhar Nova Atividade" e "Abrir Formulário de Avaliação" ambos ativos, apontando para os formulários reais.
 - Testado de ponta a ponta com navegador headless (Playwright): as 3 abas renderizam sem erros, filtros e gráficos funcionam, e o link do botão de cadastro foi verificado apontando para a URL correta.
+- Pergunta "Tipo de Conteúdo" adicionada ao formulário de cadastro (Seção 4), para que a comunidade também possa enviar artigos e exercícios didáticos pelo formulário, não só atividades.
 
 ## Pendências
 
