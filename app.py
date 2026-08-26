@@ -62,7 +62,7 @@ DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
         "Idade Recomendada": "6-8 anos",
         "Série Escolar": "1º ano",
         _COL_DEF_REAL: "TEA (Transtorno do Espectro Autista)",
-        "Link do Vídeo/Conteúdo": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "Link do Vídeo/Conteúdo": "",
     },
     {
         _COL_TITULO_REAL: "Corrida dos números com pausas ativas",
@@ -78,7 +78,7 @@ DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
         "Idade Recomendada": "3-5 anos",
         "Série Escolar": "Educação Infantil",
         _COL_DEF_REAL: "Deficiência Auditiva",
-        "Link do Vídeo/Conteúdo": "https://youtu.be/dQw4w9WgXcQ",
+        "Link do Vídeo/Conteúdo": "",
     },
     {
         _COL_TITULO_REAL: "Mapa tátil do bairro",
@@ -277,7 +277,7 @@ elif aba_selecionada == "Avaliar Plataforma":
             st.button("📝 Abrir Formulário de Avaliação", disabled=True,
                        help="Configure LINK_GOOGLE_FORMS_AVALICAO em app.py para ativar este botão.")
         else:
-            st.link_button("📝 Abrir Formulário de Avaliação", LINK_GOOGLE_FORMS_AVALICAO, type="primary")
+            st.link_button("📝 Abrir Formulário de Avaliação", LINK_GOOGLE_FORMS_AVALICAO, type="primary");
 
     with col_direita:
         st.markdown("### O que a comunidade está dizendo:")
