@@ -8,7 +8,65 @@ import pandas as pd
 # ============================================================
 
 # 1. CONFIGURAÇÃO DA PÁGINA
-st.set_page_config(page_title="Inclusão Compartilhada", page_icon="🧩", layout="wide")
+st.set_page_config(
+    page_title="Inclusão Compartilhada",
+    page_icon="🧩",
+    layout="wide",
+    # Em telas estreitas (celular), o Streamlit normalmente esconde o menu
+    # lateral e mostra apenas uma pequena setinha "»" no canto superior
+    # esquerdo para abri-lo. Em alguns navegadores embutidos (como o do
+    # WhatsApp), essa setinha fica pouco visível/pouco perceptível, dando a
+    # impressão de que as abas "Estatísticas do Projeto" e "Avaliar
+    # Plataforma" sumiram. Começar com o menu já aberto ("expanded") garante
+    # que a navegação apareça de cara também no celular.
+    initial_sidebar_state="expanded",
+)
+
+# ------------------------------------------------------------
+# 2.1 AJUSTES DE CSS PARA CELULAR
+#
+# - Aumenta e destaca a setinha de abrir/fechar o menu lateral
+#   (por padrão ela é pequena e cinza-clara, quase invisível em telas
+#   pequenas ou em navegadores embutidos de apps como o WhatsApp).
+# - Evita que o rodapé/menu "Manage app" do Streamlit Cloud (visível
+#   apenas para quem está logado na conta do Streamlit, com foto de
+#   perfil e botão colorido) sobreponha o conteúdo da página para quem
+#   está apenas visitando o link público.
+# ------------------------------------------------------------
+st.markdown(
+    """
+    <style>
+    /* Setinha de abrir o menu lateral quando ele está fechado */
+    [data-testid="collapsedControl"] {
+        background-color: #4A90E2 !important;
+        border-radius: 8px !important;
+        padding: 6px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: 999999 !important;
+    }
+    [data-testid="collapsedControl"] svg {
+        color: white !important;
+        fill: white !important;
+        width: 1.6rem !important;
+        height: 1.6rem !important;
+    }
+    /* Evita que a barra/rodapé "Manage app" do Streamlit Cloud (só
+       aparece para quem está logado na conta dona do app) cubra o
+       conteúdo em telas pequenas. */
+    @media (max-width: 640px) {
+        div[data-testid="stToolbar"],
+        div[data-testid="stDecoration"] {
+            z-index: 1 !important;
+        }
+        .main .block-container {
+            padding-bottom: 4rem !important;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # ------------------------------------------------------------
 # 2. MODO DE TESTE
