@@ -52,12 +52,20 @@ def _eh_placeholder(url: str) -> bool:
 
 # 3. DADOS DE EXEMPLO (usados no Modo de Teste e como rede de segurança
 #    caso a planilha real ainda não tenha respostas)
+#
+#    Cobrem os 8 tipos de deficiência/neurodivergência do formulário, cada um
+#    com 1 atividade, 1 artigo e 1 exercício didático, para que a plataforma já
+#    tenha exemplos de uso reais assim que publicada — mesmo antes da
+#    comunidade enviar suas próprias contribuições.
 _COL_TITULO_REAL = "Título da atividade"
 _COL_DEF_REAL = "Para qual tipo de deficiência ou neurodivergência esta atividade foi pensada?"
+_COL_TIPO_CONTEUDO = "Tipo de Conteúdo"
 
 DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
+    # --- TEA (Transtorno do Espectro Autista) ---
     {
         _COL_TITULO_REAL: "Caça ao tesouro sensorial",
+        _COL_TIPO_CONTEUDO: "Atividade",
         "Descrição da Atividade": "Circuito com texturas, sons e cheiros variados para exploração sensorial guiada, com rotina visual antecipando cada estação.",
         "Idade Recomendada": "6-8 anos",
         "Série Escolar": "1º ano",
@@ -65,7 +73,27 @@ DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
         "Link do Vídeo/Conteúdo": "",
     },
     {
+        _COL_TITULO_REAL: "Rotinas visuais em sala de aula: um apoio simples para a autonomia de alunos autistas",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo para educadores explicando o que são rotinas visuais, por que reduzem a ansiedade em momentos de transição e como montar uma com poucos recursos (cartões, pictogramas, quadro de rotina do dia).",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "1º ano",
+        _COL_DEF_REAL: "TEA (Transtorno do Espectro Autista)",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Monte sua rotina visual do dia",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Exercício de sequenciamento: o aluno organiza cartões de atividades (chegada, roda de leitura, lanche, recreio, saída) na ordem correta, fixando-os em um quadro de rotina.",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "1º ano",
+        _COL_DEF_REAL: "TEA (Transtorno do Espectro Autista)",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- TDAH ---
+    {
         _COL_TITULO_REAL: "Corrida dos números com pausas ativas",
+        _COL_TIPO_CONTEUDO: "Atividade",
         "Descrição da Atividade": "Atividade de matemática com deslocamento físico entre estações, pensada para manter o foco e permitir gasto de energia.",
         "Idade Recomendada": "9-11 anos",
         "Série Escolar": "4º ano",
@@ -73,7 +101,27 @@ DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
         "Link do Vídeo/Conteúdo": "",
     },
     {
+        _COL_TITULO_REAL: "Pausas ativas em sala de aula: por que funcionam para alunos com TDAH",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo explicando a relação entre movimento e atenção, com sugestões práticas de pausas de 2 a 5 minutos para intercalar entre blocos de atividade.",
+        "Idade Recomendada": "9-11 anos",
+        "Série Escolar": "4º ano",
+        _COL_DEF_REAL: "TDAH",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Semáforo da autorregulação",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Ficha com três cores (verde, amarelo, vermelho) para o aluno sinalizar seu nível de agitação/foco ao longo da aula, treinando autopercepção.",
+        "Idade Recomendada": "9-11 anos",
+        "Série Escolar": "4º ano",
+        _COL_DEF_REAL: "TDAH",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- Deficiência Auditiva ---
+    {
         _COL_TITULO_REAL: "Contação de histórias em Libras",
+        _COL_TIPO_CONTEUDO: "Atividade",
         "Descrição da Atividade": "História narrada em Libras com apoio de imagens e legenda simultânea em português.",
         "Idade Recomendada": "3-5 anos",
         "Série Escolar": "Educação Infantil",
@@ -81,7 +129,27 @@ DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
         "Link do Vídeo/Conteúdo": "",
     },
     {
+        _COL_TITULO_REAL: "Libras na sala de aula comum: primeiros passos para professores ouvintes",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo com sinais básicos de acolhimento em Libras e orientações para criar um ambiente visualmente acessível para alunos surdos.",
+        "Idade Recomendada": "3-5 anos",
+        "Série Escolar": "Educação Infantil",
+        _COL_DEF_REAL: "Deficiência Auditiva",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Jogo da memória com o alfabeto manual",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Jogo de cartas que pareia cada letra do alfabeto com sua configuração correspondente em Libras, reforçando o reconhecimento do alfabeto manual.",
+        "Idade Recomendada": "3-5 anos",
+        "Série Escolar": "Educação Infantil",
+        _COL_DEF_REAL: "Deficiência Auditiva",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- Deficiência Visual ---
+    {
         _COL_TITULO_REAL: "Mapa tátil do bairro",
+        _COL_TIPO_CONTEUDO: "Atividade",
         "Descrição da Atividade": "Maquete tátil com texturas diferentes representando ruas, praças e pontos de referência do entorno da escola.",
         "Idade Recomendada": "12-14 anos",
         "Série Escolar": "7º ano",
@@ -89,11 +157,133 @@ DADOS_EXEMPLO_ATIVIDADES = pd.DataFrame([
         "Link do Vídeo/Conteúdo": "",
     },
     {
+        _COL_TITULO_REAL: "Descrevendo imagens e criando materiais táteis: acessibilidade na prática",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo com técnicas de descrição de imagem para alunos com baixa visão ou cegueira e dicas de materiais de baixo custo para criar texturas em relevo.",
+        "Idade Recomendada": "12-14 anos",
+        "Série Escolar": "7º ano",
+        _COL_DEF_REAL: "Deficiência Visual",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Reconhecimento de texturas",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Caça a objetos por toque: o aluno identifica formas geométricas e texturas guardadas em uma caixa sensorial, descrevendo em voz alta o que sente.",
+        "Idade Recomendada": "12-14 anos",
+        "Série Escolar": "7º ano",
+        _COL_DEF_REAL: "Deficiência Visual",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- Deficiência Física/Motora ---
+    {
+        _COL_TITULO_REAL: "Boliche adaptado",
+        _COL_TIPO_CONTEUDO: "Atividade",
+        "Descrição da Atividade": "Jogo de boliche com pinos leves e rampa de lançamento, permitindo participação de alunos com diferentes níveis de mobilidade de mãos e braços.",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "2º ano",
+        _COL_DEF_REAL: "Deficiência Física/Motora",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Adaptando materiais escolares para alunos com deficiência física",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo com exemplos de adaptações simples e de baixo custo — engrossadores de lápis, apoios de mesa, pranchas inclinadas — para tarefas do dia a dia em sala.",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "2º ano",
+        _COL_DEF_REAL: "Deficiência Física/Motora",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Circuito de coordenação com apoio",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Percurso curto com pegadores adaptados e superfícies variadas, trabalhando coordenação motora no ritmo de cada aluno.",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "2º ano",
+        _COL_DEF_REAL: "Deficiência Física/Motora",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- Deficiência Intelectual / Síndrome de Down ---
+    {
         _COL_TITULO_REAL: "Comunicação alternativa no recreio",
+        _COL_TIPO_CONTEUDO: "Atividade",
         "Descrição da Atividade": "Cartões de Comunicação Alternativa (CAA) plastificados para mediar brincadeiras coletivas no intervalo.",
         "Idade Recomendada": "6-8 anos",
         "Série Escolar": "2º ano",
         _COL_DEF_REAL: "Deficiência Intelectual / Síndrome de Down",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Comunicação Alternativa e Aumentativa (CAA): guia rápido para o dia a dia escolar",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo introdutório sobre CAA, com exemplos de pranchas de comunicação simples para pedidos, sentimentos e escolhas do dia a dia.",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "2º ano",
+        _COL_DEF_REAL: "Deficiência Intelectual / Síndrome de Down",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Sequência de rotina com cartões de CAA",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "O aluno organiza cartões de CAA na ordem correta das etapas de uma tarefa simples (por exemplo, lavar as mãos), reforçando a compreensão sequencial.",
+        "Idade Recomendada": "6-8 anos",
+        "Série Escolar": "2º ano",
+        _COL_DEF_REAL: "Deficiência Intelectual / Síndrome de Down",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- Dislexia / Discalculia ---
+    {
+        _COL_TITULO_REAL: "Leitura compartilhada com apoio de áudio",
+        _COL_TIPO_CONTEUDO: "Atividade",
+        "Descrição da Atividade": "Leitura em dupla de um texto curto com faixa de áudio sincronizada e fonte ampliada e espaçada, reduzindo a carga de decodificação do texto.",
+        "Idade Recomendada": "9-11 anos",
+        "Série Escolar": "5º ano",
+        _COL_DEF_REAL: "Dislexia / Discalculia",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Fonte, espaçamento e cor: pequenas mudanças que ajudam alunos com dislexia",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo com orientações práticas de formatação de material impresso e digital (tipo de fonte, espaçamento entre linhas, contraste) para alunos com dislexia.",
+        "Idade Recomendada": "9-11 anos",
+        "Série Escolar": "5º ano",
+        _COL_DEF_REAL: "Dislexia / Discalculia",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Reta numérica manipulável",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Exercício voltado à discalculia: o aluno usa uma reta numérica física com marcadores móveis para resolver operações simples de adição e subtração.",
+        "Idade Recomendada": "9-11 anos",
+        "Série Escolar": "5º ano",
+        _COL_DEF_REAL: "Dislexia / Discalculia",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    # --- Múltiplas deficiências / Outro ---
+    {
+        _COL_TITULO_REAL: "Estação multissensorial adaptável",
+        _COL_TIPO_CONTEUDO: "Atividade",
+        "Descrição da Atividade": "Estação com estímulos visuais, sonoros e táteis ajustáveis, permitindo que o professor combine recursos conforme as necessidades específicas de cada aluno.",
+        "Idade Recomendada": "12-14 anos",
+        "Série Escolar": "8º ano",
+        _COL_DEF_REAL: "Múltiplas deficiências / Outro",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Planejamento individualizado: como adaptar uma atividade para múltiplas necessidades",
+        _COL_TIPO_CONTEUDO: "Artigo",
+        "Descrição da Atividade": "Artigo com um roteiro passo a passo para adaptar qualquer atividade da plataforma quando o aluno tem mais de uma condição associada.",
+        "Idade Recomendada": "12-14 anos",
+        "Série Escolar": "8º ano",
+        _COL_DEF_REAL: "Múltiplas deficiências / Outro",
+        "Link do Vídeo/Conteúdo": "",
+    },
+    {
+        _COL_TITULO_REAL: "Ficha de adaptação personalizada",
+        _COL_TIPO_CONTEUDO: "Exercício Didático",
+        "Descrição da Atividade": "Modelo de ficha para o professor registrar quais adaptações (visual, motora, de comunicação) serão usadas em uma atividade específica.",
+        "Idade Recomendada": "12-14 anos",
+        "Série Escolar": "8º ano",
+        _COL_DEF_REAL: "Múltiplas deficiências / Outro",
         "Link do Vídeo/Conteúdo": "",
     },
 ])
@@ -173,11 +363,15 @@ if aba_selecionada == "Visualizar Atividades":
         col_titulo = _COL_TITULO_REAL
         col_desc = "Descrição da Atividade"
         col_link = "Link do Vídeo/Conteúdo"
+        col_tipo = _COL_TIPO_CONTEUDO
 
         # Se a planilha tiver variações de nome, você pode mapear aqui:
         for col in [col_idade, col_serie, col_def, col_titulo, col_desc, col_link]:
             if col not in df_atividades.columns:
                 st.sidebar.caption(f"⚠️ Coluna ausente na planilha: {col}")
+
+        tipos_conteudo = ["Todos"] + sorted(list(df_atividades.get(col_tipo, pd.Series(dtype=object)).dropna().unique()))
+        tipo_sel = st.sidebar.selectbox("Tipo de Conteúdo", tipos_conteudo)
 
         idades = ["Todos"] + sorted(list(df_atividades.get(col_idade, pd.Series(dtype=object)).dropna().unique()))
         idade_sel = st.sidebar.selectbox("Idade", idades)
@@ -190,6 +384,9 @@ if aba_selecionada == "Visualizar Atividades":
 
         # Lógica de filtragem
         df_filtrado = df_atividades.copy()
+
+        if tipo_sel != "Todos" and col_tipo in df_filtrado.columns:
+            df_filtrado = df_filtrado[df_filtrado[col_tipo].astype(str) == str(tipo_sel)]
 
         if idade_sel != "Todos" and col_idade in df_filtrado.columns:
             df_filtrado = df_filtrado[df_filtrado[col_idade].astype(str) == str(idade_sel)]
@@ -206,6 +403,8 @@ if aba_selecionada == "Visualizar Atividades":
         if df_filtrado.empty:
             st.info("Nenhuma atividade corresponde aos filtros selecionados.")
         else:
+            _EMOJI_TIPO = {"Atividade": "🎯", "Artigo": "📄", "Exercício Didático": "✏️"}
+
             for _, row in df_filtrado.iterrows():
                 with st.container():
                     titulo = row.get(col_titulo, "Sem título")
@@ -214,8 +413,13 @@ if aba_selecionada == "Visualizar Atividades":
                     serie_v = row.get(col_serie, "N/A")
                     def_v = row.get(col_def, "N/A")
                     link = row.get(col_link, "")
+                    tipo_v = row.get(col_tipo, "Atividade")
+                    if not (isinstance(tipo_v, str) and tipo_v.strip()):
+                        tipo_v = "Atividade"
+                    emoji_tipo = _EMOJI_TIPO.get(tipo_v, "🎯")
 
-                    st.markdown(f"### {titulo}")
+                    st.markdown(f"### {emoji_tipo} {titulo}")
+                    st.caption(f"**Tipo de Conteúdo:** {tipo_v}")
 
                     c1, c2 = st.columns(2)
                     c1.caption(f"**Público:** {idade_v} | {serie_v}")
@@ -243,10 +447,10 @@ elif aba_selecionada == "Estatísticas do Projeto":
         total_atividades = len(df_atividades)
         st.metric(label="Total de Atividades Cadastradas", value=total_atividades)
 
-        col_grafico1, col_grafico2 = st.columns(2)
+        col_grafico1, col_grafico2, col_grafico3 = st.columns(3)
 
         with col_grafico1:
-            st.markdown("### Atividades por Tipo de Deficiência")
+            st.markdown("### Por Tipo de Deficiência")
             if _COL_DEF_REAL in df_atividades.columns:
                 contagem_def = df_atividades[_COL_DEF_REAL].value_counts()
                 st.bar_chart(contagem_def)
@@ -254,12 +458,20 @@ elif aba_selecionada == "Estatísticas do Projeto":
                 st.caption(f"Coluna '{_COL_DEF_REAL}' não encontrada.")
 
         with col_grafico2:
-            st.markdown("### Distribuição por Idade")
+            st.markdown("### Por Idade")
             if "Idade Recomendada" in df_atividades.columns:
                 contagem_idade = df_atividades["Idade Recomendada"].value_counts()
                 st.area_chart(contagem_idade)
             else:
                 st.caption("Coluna 'Idade Recomendada' não encontrada.")
+
+        with col_grafico3:
+            st.markdown("### Por Tipo de Conteúdo")
+            if _COL_TIPO_CONTEUDO in df_atividades.columns:
+                contagem_tipo = df_atividades[_COL_TIPO_CONTEUDO].value_counts()
+                st.bar_chart(contagem_tipo)
+            else:
+                st.caption(f"Coluna '{_COL_TIPO_CONTEUDO}' não encontrada.")
     else:
         st.info("Aguardando o envio de dados para gerar os gráficos.")
 
