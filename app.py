@@ -277,7 +277,7 @@ elif aba_selecionada == "Avaliar Plataforma":
             st.button("📝 Abrir Formulário de Avaliação", disabled=True,
                        help="Configure LINK_GOOGLE_FORMS_AVALICAO em app.py para ativar este botão.")
         else:
-            st.link_button("📝 Abrir Formulário de Avaliação", LINK_GOOGLE_FORMS_AVALICAO, type="primary");
+            st.link_button("📝 Abrir Formulário de Avaliação", LINK_GOOGLE_FORMS_AVALICAO, type="primary")
 
     with col_direita:
         st.markdown("### O que a comunidade está dizendo:")
