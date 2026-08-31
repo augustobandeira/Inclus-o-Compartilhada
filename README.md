@@ -19,11 +19,22 @@ Com `MODO_TESTE = False` (já configurado), o app carrega as atividades diretame
 
 ## Exemplos embutidos (dados de demonstração)
 
-`DADOS_EXEMPLO_ATIVIDADES` em `app.py` cobre os 8 tipos de deficiência/neurodivergência do formulário — TEA, TDAH, Deficiência Auditiva, Deficiência Visual, Deficiência Física/Motora, Deficiência Intelectual/Síndrome de Down, Dislexia/Discalculia e Múltiplas deficiências/Outro — com 3 exemplos cada (1 atividade, 1 artigo e 1 exercício didático), totalizando 24 itens. Esse conteúdo foi escrito internamente para o projeto (não é conteúdo real de terceiros) e serve para que a plataforma já tenha exemplos de uso completos assim que publicada, mesmo antes de a comunidade enviar suas próprias contribuições pelo formulário. Nenhum desses exemplos tem link de vídeo/conteúdo externo preenchido, para evitar links quebrados ou incorretos.
+`DADOS_EXEMPLO_ATIVIDADES` em `app.py` cobre os 8 tipos de deficiência/neurodivergência do formulário — TEA, TDAH, Deficiência Auditiva, Deficiência Visual, Deficiência Física/Motora, Deficiência Intelectual/Síndrome de Down, Dislexia/Discalculia e Múltiplas deficiências/Outro — com **5 exemplos cada** (1 atividade + 1 artigo originais, 1 exercício didático, e mais 1 atividade + 1 artigo adicionados posteriormente com faixa etária/série diferente), totalizando **40 itens**. Esse conteúdo foi escrito internamente para o projeto (não é conteúdo real de terceiros) e serve para que a plataforma já tenha exemplos de uso completos assim que publicada, mesmo antes de a comunidade enviar suas próprias contribuições pelo formulário. Nenhum desses exemplos tem link de vídeo/conteúdo externo preenchido, para evitar links quebrados ou incorretos.
+
+Cada categoria também tem uma **ilustração** própria (SVG desenhado para o projeto e embutido no código como `data:` URI — sem depender de nenhuma imagem externa), exibida ao lado de cada card na aba "Visualizar Atividades".
 
 A aba "Visualizar Atividades" ganhou um filtro **Tipo de Conteúdo** (Atividade / Artigo / Exercício Didático) e cada card mostra um selo indicando o tipo (🎯 Atividade, 📄 Artigo, ✏️ Exercício Didático). A aba "Estatísticas do Projeto" ganhou um terceiro gráfico com a distribuição por Tipo de Conteúdo.
 
 > O formulário do Google agora também pergunta o Tipo de Conteúdo: a Pergunta 23 ("Tipo de Conteúdo", Múltipla escolha, obrigatória, com as opções Atividade/Artigo/Exercício Didático) foi adicionada como a primeira pergunta da Seção 4, antes de "Título da Atividade". O texto da pergunta bate exatamente com `_COL_TIPO_CONTEUDO` em `app.py`, então a coluna nova na planilha de respostas é reconhecida automaticamente pelo app, sem precisar de nenhum ajuste de código. Respostas antigas (enviadas antes dessa mudança) continuam aparecendo com o selo "🎯 Atividade" por padrão, já que não têm essa coluna preenchida.
+
+### Bug corrigido: "nenhum resultado encontrado" nos filtros (31/08/2026)
+
+Usuários relataram que, ao preencher os filtros de busca (Tipo de Conteúdo, Idade, Série Escolar, Foco/Deficiência), a busca às vezes não retornava nada — mesmo havendo exemplos cadastrados para cada campo isoladamente. Duas causas foram encontradas e corrigidas:
+
+1. **Bug principal:** o filtro de "Foco/Deficiência" usava `.str.contains()` do pandas em modo *regex* (o padrão). Como o nome da categoria **"TEA (Transtorno do Espectro Autista)"** contém parênteses — caracteres especiais de regex — filtrar por essa categoria não encontrava **nenhum resultado, nem os próprios exemplos de TEA**. Corrigido adicionando `regex=False`, para que o texto seja sempre comparado literalmente.
+2. **Causa estrutural:** os 4 filtros eram aplicados de forma independente. Como cada categoria tem sua própria combinação fixa de idade/série, era fácil escolher uma combinação de filtros (ex.: Idade "6-8 anos" + Série "1º ano" + Deficiência "Física/Motora") que não existe em nenhuma linha, levando a "nenhum resultado" mesmo com dados válidos. Corrigido tornando os filtros **em cascata**: cada campo agora só oferece as opções que ainda têm pelo menos um resultado dado o que já foi selecionado antes — tornando estruturalmente impossível chegar a uma combinação vazia pela própria interface.
+
+A correção foi verificada com um script de teste (`teste_filtros.py`, incluído no repositório) que simula a lógica antiga e a nova contra os dados reais: a lógica antiga retornava "nenhum resultado" em 84% de todas as combinações de filtros testadas; a lógica nova, 0%.
 
 ## Links reais em produção
 
@@ -55,6 +66,8 @@ O formulário tem 33 perguntas em 12 seções, com ramificação condicional pel
 - Segundo formulário — "Avaliação da Plataforma" — criado, publicado e conectado (`LINK_GOOGLE_FORMS_AVALICAO`, `URL_RESPOSTAS_AVALIACOES`). Botões "Compartilhar Nova Atividade" e "Abrir Formulário de Avaliação" ambos ativos, apontando para os formulários reais.
 - Testado de ponta a ponta com navegador headless (Playwright): as 3 abas renderizam sem erros, filtros e gráficos funcionam, e o link do botão de cadastro foi verificado apontando para a URL correta.
 - Pergunta "Tipo de Conteúdo" adicionada ao formulário de cadastro (Seção 4), para que a comunidade também possa enviar artigos e exercícios didáticos pelo formulário, não só atividades.
+- Correção de responsividade no celular: menu lateral agora abre expandido por padrão (`initial_sidebar_state="expanded"`) e o botão de abrir/fechar o menu foi destacado com CSS, para não ficar escondido em navegadores embutidos (ex.: WhatsApp).
+- Bug dos filtros de busca corrigido (ver seção acima) e conteúdo de exemplo ampliado de 24 para 40 itens, com uma ilustração própria por categoria de deficiência/neurodivergência.
 
 ## Pendências
 
