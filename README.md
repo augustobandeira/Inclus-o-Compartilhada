@@ -6,7 +6,7 @@ Painel Streamlit que indexa atividades pedagógicas inclusivas cadastradas pela 
 
 - `app.py` — aplicação Streamlit (3 abas: Visualizar Atividades, Estatísticas, Avaliar Plataforma).
 - `requirements.txt` — dependências (`streamlit`, `pandas`).
-- `.streamlit/config.toml` — tema visual (azul acolhedor).
+- `.streamlit/config.toml` — tema visual (verde sálvia, tom calmo e relaxante).
 
 ## Rodar localmente
 
@@ -68,6 +68,8 @@ O formulário tem 33 perguntas em 12 seções, com ramificação condicional pel
 - Pergunta "Tipo de Conteúdo" adicionada ao formulário de cadastro (Seção 4), para que a comunidade também possa enviar artigos e exercícios didáticos pelo formulário, não só atividades.
 - Correção de responsividade no celular: menu lateral agora abre expandido por padrão (`initial_sidebar_state="expanded"`) e o botão de abrir/fechar o menu foi destacado com CSS, para não ficar escondido em navegadores embutidos (ex.: WhatsApp).
 - Bug dos filtros de busca corrigido (ver seção acima) e conteúdo de exemplo ampliado de 24 para 40 itens, com uma ilustração própria por categoria de deficiência/neurodivergência.
+- **Paleta de cores trocada para um tom "verde sálvia"**, mais calmo e acolhedor que o azul usado antes (`.streamlit/config.toml` e o CSS embutido em `app.py`). As 8 ilustrações também foram atualizadas para usar a nova cor principal.
+- **Linguagem mais acolhedora nos textos gerais:** o rótulo do filtro que antes era "Foco/Deficiência" agora é "**Perfil de Aprendizagem**", e o gráfico "Por Tipo de Deficiência" virou "**Por Perfil de Aprendizagem**". Os nomes técnicos de cada categoria (TEA, TDAH, Deficiência Visual, Deficiência Auditiva, Deficiência Física/Motora, Deficiência Intelectual/Síndrome de Down, Dislexia/Discalculia) foram mantidos como estão nos textos gerais/rótulos, porque nem toda categoria da plataforma é uma neurodivergência — trocar "deficiência" por "neurodivergência" em todas elas (ex.: chamar deficiência visual de "neurodivergência visual") seria tecnicamente impreciso. A pergunta do Google Forms que alimenta a coluna de categoria ("Para qual tipo de deficiência ou neurodivergência esta atividade foi pensada?") não foi alterada, pois já usa as duas palavras lado a lado e é o texto que precisa continuar batendo exatamente com o cabeçalho da planilha de respostas.
 
 ## Pendências
 

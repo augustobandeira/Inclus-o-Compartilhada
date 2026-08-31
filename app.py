@@ -770,7 +770,13 @@ if aba_selecionada == "Visualizar Atividades":
             df_disponivel = df_disponivel[df_disponivel[col_serie].astype(str) == str(serie_sel)]
 
         deficiencias = ["Todos"] + sorted(list(df_disponivel.get(col_def, pd.Series(dtype=object)).dropna().unique()))
-        deficiencia_sel = st.sidebar.selectbox("Foco/Deficiência", deficiencias)
+        # Rótulo mais acolhedor no filtro visível ao usuário: em vez de
+        # "Foco/Deficiência", usamos "Perfil de Aprendizagem". Isso não
+        # afeta os valores do filtro em si (que continuam sendo os nomes
+        # técnicos corretos de cada categoria, como TEA, TDAH, Deficiência
+        # Visual etc. — cada um preciso para a categoria que representa),
+        # só a palavra usada no rótulo do campo.
+        deficiencia_sel = st.sidebar.selectbox("Perfil de Aprendizagem", deficiencias)
         if deficiencia_sel != "Todos" and col_def in df_disponivel.columns:
             # regex=False é essencial aqui: o nome da categoria "TEA
             # (Transtorno do Espectro Autista)" contém parênteses, que
@@ -854,7 +860,7 @@ elif aba_selecionada == "Estatísticas do Projeto":
         col_grafico1, col_grafico2, col_grafico3 = st.columns(3)
 
         with col_grafico1:
-            st.markdown("### Por Tipo de Deficiência")
+            st.markdown("### Por Perfil de Aprendizagem")
             if _COL_DEF_REAL in df_atividades.columns:
                 contagem_def = df_atividades[_COL_DEF_REAL].value_counts()
                 st.bar_chart(contagem_def)
