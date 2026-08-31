@@ -40,7 +40,7 @@ st.markdown(
     <style>
     /* Setinha de abrir o menu lateral quando ele está fechado */
     [data-testid="collapsedControl"] {
-        background-color: #4A90E2 !important;
+        background-color: #4F6F52 !important;
         border-radius: 8px !important;
         padding: 6px !important;
         opacity: 1 !important;
@@ -144,7 +144,7 @@ _SVG_TEA = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#EAF2FB"/>
   <path d="M60 100c0-16 13-29 29-29 12 0 20 7 31 18 11-11 19-18 31-18 16 0 29 13 29 29s-13 29-29 29c-12 0-20-7-31-18-11 11-19 18-31 18-16 0-29-13-29-29z"
-        fill="none" stroke="#4A90E2" stroke-width="12" stroke-linecap="round"/>
+        fill="none" stroke="#4F6F52" stroke-width="12" stroke-linecap="round"/>
   <path d="M60 100c0-16 13-29 29-29 12 0 20 7 31 18" fill="none" stroke="#F5A623" stroke-width="6" stroke-linecap="round"/>
   <path d="M120 89c11-11 19-18 31-18 16 0 29 13 29 29" fill="none" stroke="#7ED6A5" stroke-width="6" stroke-linecap="round"/>
 </svg>
@@ -154,7 +154,7 @@ _SVG_TDAH = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#FFF3E0"/>
   <path d="M100 42c-24 0-40 17-40 36 0 7 2 13 4 16-11 5-18 15-18 26 0 15 12 27 27 27h2c3 12 14 20 27 20 10 0 18-4 24-11 5 4 12 6 18 6 16 0 28-13 28-28 0-9-4-17-11-23 4-6 6-13 6-20 0-21-18-38-40-38-9 0-18 3-25 9-1-9-1-20-2-20z"
-        fill="#4A90E2" fill-opacity="0.15" stroke="#4A90E2" stroke-width="6"/>
+        fill="#4F6F52" fill-opacity="0.15" stroke="#4F6F52" stroke-width="6"/>
   <polygon points="108,55 82,112 100,112 90,150 130,93 106,93" fill="#F5A623"/>
 </svg>
 """
@@ -163,10 +163,10 @@ _SVG_AUDITIVA = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#E8F7EE"/>
   <path d="M78 152c-17 0-30-14-30-31V92c0-6 5-11 11-11s11 5 11 11v18"
-        fill="none" stroke="#4A90E2" stroke-width="10" stroke-linecap="round"/>
-  <rect x="66" y="56" width="16" height="56" rx="8" fill="#4A90E2"/>
-  <rect x="89" y="50" width="16" height="62" rx="8" fill="#4A90E2"/>
-  <rect x="112" y="56" width="16" height="56" rx="8" fill="#4A90E2"/>
+        fill="none" stroke="#4F6F52" stroke-width="10" stroke-linecap="round"/>
+  <rect x="66" y="56" width="16" height="56" rx="8" fill="#4F6F52"/>
+  <rect x="89" y="50" width="16" height="62" rx="8" fill="#4F6F52"/>
+  <rect x="112" y="56" width="16" height="56" rx="8" fill="#4F6F52"/>
   <path d="M140 82c11 8 11 32 0 40" fill="none" stroke="#7ED6A5" stroke-width="6" stroke-linecap="round"/>
   <path d="M153 70c19 14 19 48 0 62" fill="none" stroke="#7ED6A5" stroke-width="6" stroke-linecap="round"/>
 </svg>
@@ -176,8 +176,8 @@ _SVG_VISUAL = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#EFF3FB"/>
   <path d="M28 100c20-30 50-46 72-46s52 16 72 46c-20 30-50 46-72 46s-52-16-72-46z"
-        fill="none" stroke="#4A90E2" stroke-width="8"/>
-  <circle cx="100" cy="100" r="24" fill="#4A90E2"/>
+        fill="none" stroke="#4F6F52" stroke-width="8"/>
+  <circle cx="100" cy="100" r="24" fill="#4F6F52"/>
   <circle cx="92" cy="92" r="6" fill="#FFFFFF"/>
   <g fill="#F5A623">
     <circle cx="55" cy="152" r="5"/>
@@ -193,9 +193,9 @@ _SVG_VISUAL = """
 _SVG_FISICA = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#EAF2FB"/>
-  <circle cx="112" cy="55" r="14" fill="#4A90E2"/>
+  <circle cx="112" cy="55" r="14" fill="#4F6F52"/>
   <path d="M100 80l10 30h30a8 8 0 010 16h-24l18 34a8 8 0 01-14 8l-22-40-12 10a10 10 0 01-13-15l20-17 3-26z"
-        fill="#4A90E2"/>
+        fill="#4F6F52"/>
   <circle cx="95" cy="140" r="38" fill="none" stroke="#F5A623" stroke-width="8"/>
   <line x1="95" y1="140" x2="120" y2="120" stroke="#F5A623" stroke-width="6" stroke-linecap="round"/>
 </svg>
@@ -206,8 +206,8 @@ _SVG_INTELECTUAL_DOWN = """
   <circle cx="100" cy="100" r="95" fill="#FDEEF3"/>
   <path d="M100 145s-42-26-42-58c0-17 14-29 29-29 8 0 16 4 13 12 3-8 21-12 29 0 0 0 13 12 13 29 0 32-42 58-42 58z"
         fill="#E0567C"/>
-  <path d="M45 152c10-14 26-22 30-8 4-12 22-18 34-6" fill="none" stroke="#4A90E2" stroke-width="8" stroke-linecap="round"/>
-  <path d="M155 152c-10-14-26-22-30-8-4-12-22-18-34-6" fill="none" stroke="#4A90E2" stroke-width="8" stroke-linecap="round"/>
+  <path d="M45 152c10-14 26-22 30-8 4-12 22-18 34-6" fill="none" stroke="#4F6F52" stroke-width="8" stroke-linecap="round"/>
+  <path d="M155 152c-10-14-26-22-30-8-4-12-22-18-34-6" fill="none" stroke="#4F6F52" stroke-width="8" stroke-linecap="round"/>
 </svg>
 """
 
@@ -215,25 +215,25 @@ _SVG_DISLEXIA_DISCALCULIA = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#F5F0FA"/>
   <path d="M100 60c-14-10-38-14-56-8v78c18-6 42-2 56 8 14-10 38-14 56-8V52c-18-6-42-2-56 8z"
-        fill="#4A90E2" fill-opacity="0.15" stroke="#4A90E2" stroke-width="6"/>
-  <line x1="100" y1="60" x2="100" y2="138" stroke="#4A90E2" stroke-width="6"/>
+        fill="#4F6F52" fill-opacity="0.15" stroke="#4F6F52" stroke-width="6"/>
+  <line x1="100" y1="60" x2="100" y2="138" stroke="#4F6F52" stroke-width="6"/>
   <text x="58" y="98" font-family="Arial, sans-serif" font-size="24" fill="#F5A623" font-weight="bold">b</text>
   <text x="118" y="98" font-family="Arial, sans-serif" font-size="24" fill="#7ED6A5" font-weight="bold">d</text>
   <text x="58" y="128" font-family="Arial, sans-serif" font-size="22" fill="#E0567C" font-weight="bold">3</text>
-  <text x="118" y="128" font-family="Arial, sans-serif" font-size="22" fill="#4A90E2" font-weight="bold">8</text>
+  <text x="118" y="128" font-family="Arial, sans-serif" font-size="22" fill="#4F6F52" font-weight="bold">8</text>
 </svg>
 """
 
 _SVG_MULTIPLAS = """
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="95" fill="#EAF6F4"/>
-  <path d="M40 95a60 60 0 01120 0z" fill="#4A90E2"/>
+  <path d="M40 95a60 60 0 01120 0z" fill="#4F6F52"/>
   <path d="M40 95a60 60 0 0130-52 60 60 0 0130 52z" fill="#F5A623"/>
   <path d="M100 43a60 60 0 0130 52 60 60 0 01-30-52z" fill="#7ED6A5"/>
   <line x1="100" y1="95" x2="100" y2="150" stroke="#5A5A5A" stroke-width="6" stroke-linecap="round"/>
   <path d="M100 150c0 8 8 12 14 6" fill="none" stroke="#5A5A5A" stroke-width="6" stroke-linecap="round"/>
   <circle cx="70" cy="165" r="10" fill="#E0567C"/>
-  <circle cx="100" cy="172" r="10" fill="#4A90E2"/>
+  <circle cx="100" cy="172" r="10" fill="#4F6F52"/>
   <circle cx="130" cy="165" r="10" fill="#7ED6A5"/>
 </svg>
 """
