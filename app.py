@@ -661,6 +661,71 @@ DADOS_EXEMPLO_AVALIACOES = pd.DataFrame([
     {"Nome": "Anônimo", "Nota": 5, "Comentário": "Os vídeos incorporados facilitam muito a vida em sala."},
 ])
 
+# ------------------------------------------------------------
+# 3.2 BIBLIOTECA DE MATERIAIS COMPLETOS (PDFs hospedados no GitHub)
+#
+# Diferente dos exemplos resumidos acima, estes são artigos completos
+# (com contexto, base legal, estratégias práticas e referências),
+# gerados por materiais/gerar_biblioteca.py e versionados no próprio
+# repositório em materiais/*.pdf. O app não hospeda os arquivos: ele
+# só aponta para o link "raw" do GitHub, que serve o PDF diretamente.
+# ------------------------------------------------------------
+_URL_BIBLIOTECA_BASE = (
+    "https://raw.githubusercontent.com/augustobandeira/"
+    "Inclus-o-Compartilhada/main/materiais/"
+)
+
+BIBLIOTECA_MATERIAIS = [
+    {
+        "slug": "tea",
+        "titulo": "Adaptando Atividades Pedagógicas para Estudantes com TEA",
+        "categoria": "TEA (Transtorno do Espectro Autista)",
+        "resumo": "Contexto, base legal (Lei nº 12.764/2012), princípios do DUA aplicados ao TEA e estratégias práticas de rotina visual e regulação sensorial.",
+    },
+    {
+        "slug": "tdah",
+        "titulo": "Estratégias de Apoio para Estudantes com TDAH em Sala de Aula",
+        "categoria": "TDAH",
+        "resumo": "Base legal (Lei nº 14.254/2021), organização de tarefas em blocos curtos, pausas ativas e apoio visual para foco e autorregulação.",
+    },
+    {
+        "slug": "deficiencia-auditiva",
+        "titulo": "Inclusão de Estudantes Surdos e com Deficiência Auditiva",
+        "categoria": "Deficiência Auditiva",
+        "resumo": "Libras como primeira língua (Lei nº 10.436/2002 e Decreto nº 5.626/2005), educação bilíngue e estratégias visuais de apoio.",
+    },
+    {
+        "slug": "deficiencia-visual",
+        "titulo": "Materiais Acessíveis para Estudantes com Deficiência Visual",
+        "categoria": "Deficiência Visual",
+        "resumo": "Audiodescrição, materiais táteis e em Braille, tecnologia assistiva e orientação e mobilidade.",
+    },
+    {
+        "slug": "deficiencia-fisica-motora",
+        "titulo": "Acessibilidade e Adaptações para Estudantes com Deficiência Física/Motora",
+        "categoria": "Deficiência Física/Motora",
+        "resumo": "Acessibilidade do ambiente (NBR 9050), adaptação de materiais escolares e tecnologia assistiva.",
+    },
+    {
+        "slug": "deficiencia-intelectual-down",
+        "titulo": "Ensino Estruturado para Estudantes com Deficiência Intelectual e Síndrome de Down",
+        "categoria": "Deficiência Intelectual / Síndrome de Down",
+        "resumo": "Comunicação Alternativa e Aumentativa (CAA), ensino em passos pequenos e currículo funcional.",
+    },
+    {
+        "slug": "dislexia-discalculia",
+        "titulo": "Apoio Pedagógico para Dislexia e Discalculia",
+        "categoria": "Dislexia / Discalculia",
+        "resumo": "Base legal (Lei nº 14.254/2021), método multissensorial de leitura e material concreto para matemática.",
+    },
+    {
+        "slug": "multiplas-deficiencias",
+        "titulo": "Planejamento Individualizado para Múltiplas Deficiências e Outras Condições",
+        "categoria": "Múltiplas deficiências / Outro",
+        "resumo": "Avaliação multidisciplinar, combinação de estratégias e o papel do Plano Educacional Individualizado (PEI).",
+    },
+]
+
 
 # 4. FUNÇÃO PARA CARREGAR OS DADOS
 @st.cache_data(ttl=60)
@@ -711,7 +776,7 @@ st.sidebar.markdown("---")
 # Sistema de navegação por abas
 aba_selecionada = st.sidebar.radio(
     "Navegue pela plataforma:",
-    ["Visualizar Atividades", "Estatísticas do Projeto", "Referências e Metodologia", "Avaliar Plataforma"]
+    ["Visualizar Atividades", "Biblioteca", "Estatísticas do Projeto", "Referências e Metodologia", "Avaliar Plataforma"]
 )
 
 # --- ABA 1: VISUALIZAR ATIVIDADES ---
@@ -867,6 +932,38 @@ if aba_selecionada == "Visualizar Atividades":
                     st.markdown("---")
     else:
         st.warning("Nenhuma atividade cadastrada ainda.")
+
+# --- ABA: BIBLIOTECA DE MATERIAIS COMPLETOS ---
+elif aba_selecionada == "Biblioteca":
+    st.title("Biblioteca de Materiais Completos")
+    st.markdown(
+        "Diferente dos resumos da aba \"Visualizar Atividades\", os materiais abaixo são "
+        "artigos completos — com contexto, base legal, princípios do Desenho Universal para "
+        "Aprendizagem (DUA) e estratégias práticas por área — um para cada perfil de "
+        "aprendizagem da plataforma. Os PDFs ficam hospedados diretamente no repositório do "
+        "projeto no GitHub."
+    )
+    st.markdown("---")
+
+    for material in BIBLIOTECA_MATERIAIS:
+        ilustracao_v = _SVG_ILUSTRACOES.get(material["categoria"], "")
+        col_img, col_texto = st.columns([1, 4]) if ilustracao_v else (None, st.container())
+        if ilustracao_v:
+            with col_img:
+                st.markdown(
+                    f'<img src="{ilustracao_v}" alt="Ilustração da categoria" '
+                    'style="width:100%;max-width:140px;border-radius:14px;" />',
+                    unsafe_allow_html=True,
+                )
+        with col_texto:
+            st.markdown(f"### 📚 {material['titulo']}")
+            st.caption(f"**Perfil de Aprendizagem:** {material['categoria']}")
+            st.write(material["resumo"])
+            st.link_button(
+                "📥 Abrir/baixar PDF completo",
+                _URL_BIBLIOTECA_BASE + material["slug"] + ".pdf",
+            )
+        st.markdown("---")
 
 # --- ABA 2: ESTATÍSTICAS DO PROJETO ---
 elif aba_selecionada == "Estatísticas do Projeto":
