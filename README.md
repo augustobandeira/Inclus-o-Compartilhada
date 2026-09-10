@@ -4,9 +4,10 @@ Painel Streamlit que indexa atividades pedagógicas inclusivas cadastradas pela 
 
 ## Arquivos
 
-- `app.py` — aplicação Streamlit (3 abas: Visualizar Atividades, Estatísticas, Avaliar Plataforma).
+- `app.py` — aplicação Streamlit (5 abas: Visualizar Atividades, Biblioteca, Estatísticas, Referências e Metodologia, Avaliar Plataforma).
 - `requirements.txt` — dependências (`streamlit`, `pandas`).
 - `.streamlit/config.toml` — tema visual (verde sálvia, tom calmo e relaxante).
+- `materiais/` — os 8 PDFs completos da aba "Biblioteca" (um por perfil de aprendizagem) e `gerar_biblioteca.py`, o script que os gera a partir do conteúdo estruturado (usa `reportlab`; não faz parte do app, só precisa rodar de novo se o conteúdo dos materiais mudar).
 
 ## Rodar localmente
 
@@ -72,6 +73,7 @@ O formulário tem 33 perguntas em 12 seções, com ramificação condicional pel
 - **Linguagem mais acolhedora nos textos gerais:** o rótulo do filtro que antes era "Foco/Deficiência" agora é "**Perfil de Aprendizagem**", e o gráfico "Por Tipo de Deficiência" virou "**Por Perfil de Aprendizagem**". Os nomes técnicos de cada categoria (TEA, TDAH, Deficiência Visual, Deficiência Auditiva, Deficiência Física/Motora, Deficiência Intelectual/Síndrome de Down, Dislexia/Discalculia) foram mantidos como estão nos textos gerais/rótulos, porque nem toda categoria da plataforma é uma neurodivergência — trocar "deficiência" por "neurodivergência" em todas elas (ex.: chamar deficiência visual de "neurodivergência visual") seria tecnicamente impreciso. A pergunta do Google Forms que alimenta a coluna de categoria ("Para qual tipo de deficiência ou neurodivergência esta atividade foi pensada?") não foi alterada, pois já usa as duas palavras lado a lado e é o texto que precisa continuar batendo exatamente com o cabeçalho da planilha de respostas.
 - **Materiais de apoio anexados agora aparecem nos cards** (09/09/2026): a pergunta 31 do formulário ("Anexar arquivo de apoio") já existia na planilha, mas o `app.py` não lia essa coluna. Agora, quando alguém envia um PDF/documento pelo formulário, o link (ou os links, se houver mais de um arquivo) do Google Drive aparece como "📎 Baixar material de apoio" logo abaixo da descrição de cada atividade/artigo/exercício.
 - **Nova aba "Referências e Metodologia"** (09/09/2026): explica em linguagem simples os princípios do Desenho Universal para Aprendizagem (DUA/UDL) usados para organizar o conteúdo, e traz referências formatadas (Lei Brasileira de Inclusão nº 13.146/2015, BNCC, Política Nacional de Educação Especial na Perspectiva da Educação Inclusiva, CAST/UDL Guidelines e ODS 4 da Agenda 2030), além de um modelo de citação do próprio projeto — para dar mais respaldo acadêmico ao trabalho.
+- **Nova aba "Biblioteca"** (10/09/2026): 8 artigos completos em PDF (um por perfil de aprendizagem — TEA, TDAH, Deficiência Auditiva, Visual, Física/Motora, Intelectual/Síndrome de Down, Dislexia/Discalculia e Múltiplas deficiências/Outro), cada um com contexto, base legal específica da condição (ex.: Lei nº 12.764/2012 para TEA, Lei nº 10.436/2002 e Decreto nº 5.626/2005 para Libras, Lei nº 14.254/2021 para TDAH/dislexia), princípios do DUA aplicados e estratégias práticas de sala de aula. Os PDFs ficam versionados em `materiais/` no próprio repositório e são linkados via `raw.githubusercontent.com` — sem custo extra de hospedagem.
 
 ## Pendências
 
