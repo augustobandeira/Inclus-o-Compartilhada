@@ -1,4 +1,5 @@
 import base64
+import re
 
 import streamlit as st
 import pandas as pd
@@ -121,6 +122,10 @@ _COL_TITULO_REAL = "Título da atividade"
 _COL_DEF_REAL = "Para qual tipo de deficiência ou neurodivergência esta atividade foi pensada?"
 _COL_TIPO_CONTEUDO = "Tipo de Conteúdo"
 _COL_ILUSTRACAO = "Ilustração"
+# Texto exato da pergunta 31 do formulário (ver conteudo_novo_formulario.md):
+# "Anexar arquivo de apoio" — upload opcional de arquivo, vira um link do
+# Google Drive na planilha de respostas quando preenchido.
+_COL_ANEXO = "Anexar arquivo de apoio"
 
 
 # ------------------------------------------------------------
@@ -706,7 +711,7 @@ st.sidebar.markdown("---")
 # Sistema de navegação por abas
 aba_selecionada = st.sidebar.radio(
     "Navegue pela plataforma:",
-    ["Visualizar Atividades", "Estatísticas do Projeto", "Avaliar Plataforma"]
+    ["Visualizar Atividades", "Estatísticas do Projeto", "Referências e Metodologia", "Avaliar Plataforma"]
 )
 
 # --- ABA 1: VISUALIZAR ATIVIDADES ---
@@ -727,6 +732,7 @@ if aba_selecionada == "Visualizar Atividades":
         col_link = "Link do Vídeo/Conteúdo"
         col_tipo = _COL_TIPO_CONTEUDO
         col_ilustracao = _COL_ILUSTRACAO
+        col_anexo = _COL_ANEXO
 
         # Se a planilha tiver variações de nome, você pode mapear aqui:
         for col in [col_idade, col_serie, col_def, col_titulo, col_desc, col_link]:
@@ -843,6 +849,21 @@ if aba_selecionada == "Visualizar Atividades":
                             else:
                                 st.markdown(f"[Acessar Conteúdo Externo]({link})")
 
+                        # Material de apoio anexado no formulário (PDF, apostila,
+                        # imagem etc.) — a pergunta de upload do Google Forms
+                        # grava na planilha um ou mais links do Google Drive,
+                        # separados por vírgula quando há mais de um arquivo.
+                        anexo_v = row.get(col_anexo, "")
+                        if isinstance(anexo_v, str) and anexo_v.strip():
+                            urls_anexo = [u.strip() for u in re.split(r",\s*", anexo_v) if u.strip()]
+                            for i, url_anexo in enumerate(urls_anexo, start=1):
+                                rotulo = (
+                                    "📎 Baixar material de apoio"
+                                    if len(urls_anexo) == 1
+                                    else f"📎 Baixar material de apoio {i}"
+                                )
+                                st.markdown(f"[{rotulo}]({url_anexo})")
+
                     st.markdown("---")
     else:
         st.warning("Nenhuma atividade cadastrada ainda.")
@@ -884,6 +905,117 @@ elif aba_selecionada == "Estatísticas do Projeto":
                 st.caption(f"Coluna '{_COL_TIPO_CONTEUDO}' não encontrada.")
     else:
         st.info("Aguardando o envio de dados para gerar os gráficos.")
+
+# --- ABA: REFERÊNCIAS E METODOLOGIA ---
+elif aba_selecionada == "Referências e Metodologia":
+    st.title("Referências e Base Científica")
+    st.markdown(
+        "A curadoria e a organização das atividades desta plataforma seguem "
+        "marcos legais e referenciais teóricos reconhecidos na educação "
+        "inclusiva brasileira e internacional. Esta página existe para dar "
+        "transparência sobre essas bases e servir de ponto de partida para "
+        "quem quiser se aprofundar no tema."
+    )
+
+    st.markdown("### Metodologia de organização do conteúdo")
+    st.write(
+        "Cada atividade, artigo ou exercício é classificado por tipo de "
+        "conteúdo, faixa etária, série escolar e tipo de deficiência ou "
+        "neurodivergência a que se destina — estrutura inspirada nos três "
+        "princípios do Desenho Universal para Aprendizagem (DUA/UDL): "
+        "múltiplas formas de representação, de ação/expressão e de "
+        "engajamento. As sugestões vêm da comunidade (professores, "
+        "profissionais de AEE e famílias) e de curadoria própria; elas não "
+        "substituem uma avaliação individualizada feita por profissionais "
+        "especializados (AEE, fonoaudiologia, terapia ocupacional etc.)."
+    )
+
+    st.markdown("### Referências")
+
+    with st.expander("Lei Brasileira de Inclusão da Pessoa com Deficiência — Lei nº 13.146/2015"):
+        st.write(
+            "Também conhecida como Estatuto da Pessoa com Deficiência, é a "
+            "principal referência legal brasileira sobre os direitos da "
+            "pessoa com deficiência, incluindo o direito a um sistema "
+            "educacional inclusivo em todos os níveis."
+        )
+        st.caption(
+            "BRASIL. Lei nº 13.146, de 6 de julho de 2015. Institui a Lei "
+            "Brasileira de Inclusão da Pessoa com Deficiência (Estatuto da "
+            "Pessoa com Deficiência). Diário Oficial da União, Brasília, DF, "
+            "7 jul. 2015. Disponível em: "
+            "http://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm. "
+            "Acesso em: 10 set. 2026."
+        )
+
+    with st.expander("Base Nacional Comum Curricular (BNCC)"):
+        st.write(
+            "Documento normativo que define o conjunto de aprendizagens "
+            "essenciais que todos os alunos da Educação Básica devem "
+            "desenvolver, servindo de referência para a idade e a série "
+            "escolar sugeridas em cada atividade da plataforma."
+        )
+        st.caption(
+            "BRASIL. Ministério da Educação. Base Nacional Comum Curricular. "
+            "Brasília: MEC, 2018. Disponível em: "
+            "http://basenacionalcomum.mec.gov.br/. Acesso em: 10 set. 2026."
+        )
+
+    with st.expander("Política Nacional de Educação Especial na Perspectiva da Educação Inclusiva (2008)"):
+        st.write(
+            "Documento do MEC que orienta os sistemas de ensino para a "
+            "inclusão de alunos público-alvo da educação especial nas "
+            "classes comuns, com apoio do Atendimento Educacional "
+            "Especializado (AEE)."
+        )
+        st.caption(
+            "BRASIL. Ministério da Educação. Secretaria de Educação Especial. "
+            "Política Nacional de Educação Especial na Perspectiva da "
+            "Educação Inclusiva. Brasília: MEC/SEESP, 2008. Disponível em: "
+            "https://www.gov.br/mec/pt-br/media/secadi/politicaseducacaoespecial.pdf. "
+            "Acesso em: 10 set. 2026."
+        )
+
+    with st.expander("Desenho Universal para Aprendizagem — DUA (Universal Design for Learning)"):
+        st.write(
+            "Referencial teórico internacional que orienta o planejamento de "
+            "atividades acessíveis desde a concepção, por meio de múltiplas "
+            "formas de representar o conteúdo, de os alunos se expressarem e "
+            "de se engajarem — em vez de adaptações feitas depois, caso a "
+            "caso."
+        )
+        st.caption(
+            "CAST. Universal Design for Learning Guidelines, version 3.0. "
+            "Lynnfield, MA: CAST, 2024. Disponível em: "
+            "https://udlguidelines.cast.org/. Acesso em: 10 set. 2026."
+        )
+
+    with st.expander("ODS 4 — Educação de Qualidade (Agenda 2030 da ONU)"):
+        st.write(
+            "O projeto se alinha ao Objetivo de Desenvolvimento Sustentável "
+            "4, que trata de assegurar educação inclusiva, equitativa e de "
+            "qualidade, com oportunidades de aprendizagem ao longo da vida "
+            "para todos."
+        )
+        st.caption(
+            "ORGANIZAÇÃO DAS NAÇÕES UNIDAS. Transformando Nosso Mundo: a "
+            "Agenda 2030 para o Desenvolvimento Sustentável. Nova York: ONU, "
+            "2015."
+        )
+
+    st.markdown("### Como citar este projeto")
+    st.code(
+        "SOBRENOME, Nome. Inclusão Compartilhada: plataforma colaborativa de "
+        "atividades pedagógicas inclusivas. [S. l.], 2026. Disponível em: "
+        "https://inclusao-compartilhada.streamlit.app/. Acesso em: [data de acesso].",
+        language=None,
+    )
+    st.caption(
+        "Ajuste o nome do(a) autor(a) no exemplo acima. Formato livre "
+        "baseado na norma ABNT NBR 6023 para citação de sites/plataformas "
+        "digitais — confira sempre as exigências específicas do seu "
+        "trabalho ou periódico."
+    )
 
 # --- ABA 3: AVALIAÇÃO DA PLATAFORMA ---
 elif aba_selecionada == "Avaliar Plataforma":
